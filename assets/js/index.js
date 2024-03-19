@@ -37,162 +37,136 @@ class Animal {
         this.#comentarios = newComentarios
     }
 
-    pintarHTML() {
-        console.log(`estoy pintando a ${this.nombre}`)
+    pintarHTML(elemento) {
+        console.log(`Estoy pintando a ${this.nombre}`);
+        elemento.innerHTML += `
+            <div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+            </div>
+        `;
     }
 
+    previewAnimal(elemento) {
+        console.log(`Mostrando vista previa de ${this.nombre}`);
+        elemento.innerHTML = `
+            <div class="card" style="width: 50%;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+            </div>
+        `;
+    }
 }
 
 class Leon extends Animal {
-    pintarHTML(elemento) {
-        console.log(`estoy pintando a ${this.nombre}`)
-        elemento.innerHTML =
-            `<div class="card" style="width: 18rem;">
-                <img src="${this.imagen}" class="card-img-top" alt="...">
-                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
-              </div>`
-        // `<img src="${this.imagen}"/> <p>${this.nombre} ${this.edad} ${this.comentarios} ${this.sonido}</p>`
-    }
-
     rugir() {
-        console.log("rawr")
+        console.log("rawr");
     }
 }
 
 class Lobo extends Animal {
-    pintarHTML(elemento) {
-        console.log(`estoy pintando a ${this.nombre}`)
-        elemento.innerHTML =
-            `<div class="card" style="width: 18rem;">
-                <img src="${this.imagen}" class="card-img-top" alt="...">
-                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
-              </div>`
-    }
-
     aullar() {
-        console.log("auuu")
+        console.log("auuu");
     }
 }
 
 class Oso extends Animal {
-    pintarHTML(elemento) {
-        console.log(`estoy pintando a ${this.nombre}`)
-        elemento.innerHTML =
-            `<div class="card" style="width: 18rem;">
-                <img src="${this.imagen}" class="card-img-top" alt="...">
-                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
-              </div>`
-    }
-
     gruñir() {
-        console.log("rauor")
+        console.log("rauor");
     }
 }
 
 class Serpiente extends Animal {
-    pintarHTML(elemento) {
-        console.log(`estoy pintando a ${this.nombre}`)
-        elemento.innerHTML =
-            `<div class="card" style="width: 18rem;">
-                <img src="${this.imagen}" class="card-img-top" alt="...">
-                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
-              </div>`
-    }
-
     sisear() {
-        console.log("sssss")
+        console.log("sssss");
     }
 }
 
 class Aguila extends Animal {
-    pintarHTML(elemento) {
-        console.log(`estoy pintando a ${this.nombre}`)
-        elemento.innerHTML =
-            `<div class="card" style="width: 18rem;">
-                <img src="${this.imagen}" class="card-img-top" alt="...">
-                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
-              </div>`
-    }
-
     chillar() {
-        console.log("chhhss")
+        console.log("chhhss");
     }
-};
+}
 
 let animales = [];
 
 (async () => {
     try {
-        const response = await fetch("animales.json")
-        console.log(response)
+        const response = await fetch("animales.json");
         if (!response.ok) {
-            console.log("no se encuentra el animal")
+            console.log("No se encuentra el archivo de animales");
             throw {
                 code: 404,
-                message: "no se encuentra el animal"
-            }
+                message: "No se encuentra el archivo de animales"
+            };
         }
-        const data = await response.json()
-        animales = data.animales
-        // console.log(data)
-        // console.log(data.animales)
+        const data = await response.json();
+        animales = data.animales;
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 })();
 
+const Tabla = document.querySelector("#Tabla");
+const Animales = document.querySelector("#Animales");
+const animalFormulario = document.querySelector("#animalFormulario");
+const animalSeleccion = document.querySelector("#animalSeleccion");
+const edadSeleccion = document.querySelector("#edadSeleccion");
+const comentarios = document.querySelector("#comentarios");
+const preview = document.querySelector("#preview");
+const btnRegistrar = document.querySelector("#btnRegistrar");
+const audioPlayer = document.querySelector("#audioPlayer");
+const modalAnimal = document.querySelector("#modalAnimal");
 
-const Tabla = document.querySelector("#Tabla")
-const Animales = document.querySelector("#Animales")
-const animalFormulario = document.querySelector("#animalFormulario")
-const animalSeleccion = document.querySelector("#animalSeleccion")
-const edadSeleccion = document.querySelector("#edadSeleccion")
-const comentarios = document.querySelector("#comentarios")
-const preview = document.querySelector("#preview")
-const btnRegistrar = document.querySelector("#btnRegistrar")
-const audioPlayer = document.querySelector("#audioPlayer")
-const modalAnimal = document.querySelector("#modalAnimal")
+function agregarAnimal(animal) {
 
+    const animalDiv = document.createElement('div');
+    animalDiv.classList.add('animal-card', 'card', 'col-12', 'col-md-4', 'col-lg-3', 'mb-4');
+
+
+    const contenidoAnimal = `
+        <img src="${animal.imagen}" class="card-img-top" >
+        <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+            
+    `;
+
+    animalDiv.innerHTML = contenidoAnimal;
+    Animales.appendChild(animalDiv);
+    animal.previewAnimal(preview);
+}
 
 animalFormulario.addEventListener("submit", (evento) => {
-    evento.preventDefault()
+    evento.preventDefault();
 
-    // console.log(animalSeleccion.value)
-    // console.log(edadSeleccion.value)
-    // console.log(comentarios.value)
+    const nombreAnimal = animalSeleccion.value;
+    const edadAnimal = edadSeleccion.value;
+    const comentarioAnimal = comentarios.value;
 
-    // console.log(animales)
-
-    const animalEncontrado = animales.find((item) => item.name.toLowerCase() === animalSeleccion.value.toLowerCase())
+    const animalEncontrado = animales.find((item) => item.name.toLowerCase() === nombreAnimal.toLowerCase());
     const imagen = `assets/imgs/${animalEncontrado.imagen}`;
 
-
-    switch (animalSeleccion.value) {
+    let animal;
+    switch (nombreAnimal) {
         case "Leon":
-            const leon = new Leon(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
-            leon.pintarHTML(Animales)
-            leon.rugir()
+            animal = new Leon(nombreAnimal, edadAnimal, imagen, comentarioAnimal, animalEncontrado.sonido);
             break;
         case "Lobo":
-            const lobo = new Lobo(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
-            lobo.pintarHTML(Animales)
-            lobo.aullar()
+            animal = new Lobo(nombreAnimal, edadAnimal, imagen, comentarioAnimal, animalEncontrado.sonido);
             break;
         case "Oso":
-            const oso = new Oso(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
-            oso.pintarHTML(Animales)
-            oso.gruñir()
+            animal = new Oso(nombreAnimal, edadAnimal, imagen, comentarioAnimal, animalEncontrado.sonido);
             break;
         case "Serpiente":
-            const serpiente = new Serpiente(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
-            serpiente.pintarHTML(Animales)
-            serpiente.sisear()
+            animal = new Serpiente(nombreAnimal, edadAnimal, imagen, comentarioAnimal, animalEncontrado.sonido);
             break;
         case "Aguila":
-            const aguila = new Aguila(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
-            aguila.pintarHTML(Animales)
-            aguila.chillar()
+            animal = new Aguila(nombreAnimal, edadAnimal, imagen, comentarioAnimal, animalEncontrado.sonido);
             break;
+        default:
+            console.log("Animal no reconocido");
+            return;
     }
-})
+
+    agregarAnimal(animal);
+    animalFormulario.reset();
+});
