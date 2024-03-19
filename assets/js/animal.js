@@ -1,4 +1,4 @@
-export class Animal {
+export default class Animal {
     #nombre
     #edad
     #imagen

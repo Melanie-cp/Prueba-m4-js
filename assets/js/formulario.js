@@ -50,9 +50,14 @@ function agregarAnimal(animal) {
 animalFormulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
-    const nombreAnimal = animalSeleccion.value;
-    const edadAnimal = edadSeleccion.value;
-    const comentarioAnimal = comentarios.value;
+    const nombreAnimal = animalSeleccion.value.trim();
+    const edadAnimal = edadSeleccion.value.trim();
+    const comentarioAnimal = comentarios.value.trim();
+
+    if (!nombreAnimal || !edadAnimal || !comentarioAnimal) {
+        alert("Por favor, complete todos los campos para agregar el animal.");
+        return;
+    }
 
     const animalEncontrado = animales.find((item) => item.name.toLowerCase() === nombreAnimal.toLowerCase());
     const imagen = `assets/imgs/${animalEncontrado.imagen}`;
