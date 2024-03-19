@@ -29,7 +29,7 @@
         <div class="card-text my-3">
           <div class="form-group">
             <label for="exampleInputPassword1">Nombre del animal:</label>
-            <select class="form-control bg-dark text-white" id="animal">
+            <select class="form-control bg-dark text-white" id="animalSeleccion">
               <option disabled selected>Seleccione un animal</option>
               <option value="Leon">León</option>
               <option value="Lobo">Lobo</option>
@@ -41,7 +41,7 @@
 
           <div class="form-group">
             <label for="exampleInputPassword1">Años de edad estimados:</label>
-            <select class="form-control bg-dark text-white" id="edad">
+            <select class="form-control bg-dark text-white" id="edadSeleccion">
               <option disabled selected>Seleccione un rango de años</option>
 
               <option value="0 - 1 años">0 - 1 años</option>
@@ -68,9 +68,9 @@
     </div>
   </div>
 
-  <audio id="player" class="d-none"></audio>
+  <audio id="audioPlayer" class="d-none"></audio>
 
-  <div class="modal fade" id="exampleModal">
+  <div class="modal fade" id="modalAnimal">
     <div class="modal-dialog modal-dialog-centered w-25" role="document">
       <div class="modal-content bg-dark">
         <div class="modal-body">...</div>
