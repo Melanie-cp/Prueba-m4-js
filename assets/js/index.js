@@ -1,3 +1,80 @@
+class Animal {
+    #nombre
+    #edad
+    #img
+    #comentarios
+    #sonido
+
+    constructor(nombre, edad, img, comentarios, sonido) {
+        this.#nombre = nombre;
+        this.#edad = edad;
+        this.#img = img;
+        this.#comentarios = comentarios;
+        this.#sonido = sonido;
+    }
+
+    get nombre() {
+        return this.#nombre
+    }
+
+    get edad() {
+        return this.#edad
+    }
+
+    get img() {
+        return this.#img
+    }
+
+    get comentarios() {
+        return this.#comentarios
+    }
+
+    get sonido() {
+        return this.#sonido
+    }
+
+    set comentarios(newComentarios) {
+        this.#comentarios = newComentarios
+    }
+
+    pintarHTML() {
+        console.log(`estoy pintando a ${this.nombre}`)
+    }
+
+}
+
+
+class Leon extends Animal {
+    rugir() {
+        console.log("rawr")
+    }
+}
+
+class Lobo extends Animal {
+    aullar() {
+        console.log("auuu")
+    }
+}
+
+class Oso extends Animal {
+    gruñir() {
+        console.log("rauor")
+    }
+}
+
+class Serpiente extends Animal {
+    sisear() {
+        console.log("sssss")
+    }
+}
+
+class Aguila extends Animal {
+    chillar() {
+        console.log("chhhss")
+    }
+}
+
+
 const getData = async () => {
     try {
         const response = await fetch("animales.json")
@@ -35,4 +112,7 @@ const modalAnimal = document.querySelector("#modalAnimal")
 animalFormulario.addEventListener("submit", (evento) => {
     evento.preventDefault()
     console.log("me estas procesando")
+    console.log(animalSeleccion.value)
+    console.log(edadSeleccion.value)
+    console.log(comentarios.value)
 })
