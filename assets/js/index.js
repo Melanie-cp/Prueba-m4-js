@@ -1,14 +1,14 @@
 class Animal {
     #nombre
     #edad
-    #img
+    #imagen
     #comentarios
     #sonido
 
-    constructor(nombre, edad, img, comentarios, sonido) {
+    constructor(nombre, edad, imagen, comentarios, sonido) {
         this.#nombre = nombre;
         this.#edad = edad;
-        this.#img = img;
+        this.#imagen = imagen;
         this.#comentarios = comentarios;
         this.#sonido = sonido;
     }
@@ -21,8 +21,8 @@ class Animal {
         return this.#edad
     }
 
-    get img() {
-        return this.#img
+    get imagen() {
+        return this.#imagen
     }
 
     get comentarios() {
@@ -43,39 +43,67 @@ class Animal {
 
 }
 
-
 class Leon extends Animal {
+    pintarHTML(elemento) {
+        console.log(`estoy pintando a ${this.nombre}`)
+        elemento.innerHTML =
+            //     `<div class="card" style="width: 18rem;">
+            //     <img src="${this.img}" class="card-img-top" alt="...">
+            //     <div class="card-body">
+            //     <a href="#" class="btn btn-primary">Go somewhere</a>
+            //     </div>
+            //   </div>`
+            `<img src="${this.imagen}"/> <p>${this.nombre} ${this.edad} ${this.comentarios} ${this.sonido}</p>`
+    }
+
     rugir() {
         console.log("rawr")
     }
 }
 
 class Lobo extends Animal {
+    pintarHTML() {
+        console.log(`estoy pintando a ${this.nombre}`)
+    }
+
     aullar() {
         console.log("auuu")
     }
 }
 
 class Oso extends Animal {
+    pintarHTML() {
+        console.log(`estoy pintando a ${this.nombre}`)
+    }
+
     gruñir() {
         console.log("rauor")
     }
 }
 
 class Serpiente extends Animal {
+    pintarHTML() {
+        console.log(`estoy pintando a ${this.nombre}`)
+    }
+
     sisear() {
         console.log("sssss")
     }
 }
 
 class Aguila extends Animal {
+    pintarHTML() {
+        console.log(`estoy pintando a ${this.nombre}`)
+    }
+
     chillar() {
         console.log("chhhss")
     }
-}
+};
 
+let animales = [];
 
-const getData = async () => {
+(async () => {
     try {
         const response = await fetch("animales.json")
         console.log(response)
@@ -87,15 +115,15 @@ const getData = async () => {
             }
         }
         const data = await response.json()
-        console.log(data)
-        console.log(data.animales)
+        animales = data.animales
+        // console.log(data)
+        // console.log(data.animales)
 
     } catch (error) {
         console.log(error)
     }
-}
+})();
 
-getData()
 
 const Tabla = document.querySelector("#Tabla")
 const Animales = document.querySelector("#Animales")
@@ -109,10 +137,31 @@ const audioPlayer = document.querySelector("#audioPlayer")
 const modalAnimal = document.querySelector("#modalAnimal")
 
 
+
 animalFormulario.addEventListener("submit", (evento) => {
     evento.preventDefault()
-    console.log("me estas procesando")
-    console.log(animalSeleccion.value)
-    console.log(edadSeleccion.value)
-    console.log(comentarios.value)
+
+    // console.log(animalSeleccion.value)
+    // console.log(edadSeleccion.value)
+    // console.log(comentarios.value)
+
+    // console.log(animales)
+
+    const animalEncontrado = animales.find((item) => item.name.toLowerCase() === animalSeleccion.value.toLowerCase())
+
+    switch (animalSeleccion.value) {
+        case "Leon":
+            const leon = new Leon(animalEncontrado.name, edadSeleccion.value, animalEncontrado.imagen, comentarios.value, animalEncontrado.sonido)
+            leon.pintarHTML(Animales)
+            leon.rugir()
+            break;
+        case "Lobo":
+            break;
+        case "Oso":
+            break;
+        case "Serpiente":
+            break;
+        case "Aguila":
+            break;
+    }
 })
