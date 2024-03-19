@@ -47,13 +47,11 @@ class Leon extends Animal {
     pintarHTML(elemento) {
         console.log(`estoy pintando a ${this.nombre}`)
         elemento.innerHTML =
-            //     `<div class="card" style="width: 18rem;">
-            //     <img src="${this.img}" class="card-img-top" alt="...">
-            //     <div class="card-body">
-            //     <a href="#" class="btn btn-primary">Go somewhere</a>
-            //     </div>
-            //   </div>`
-            `<img src="${this.imagen}"/> <p>${this.nombre} ${this.edad} ${this.comentarios} ${this.sonido}</p>`
+            `<div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+              </div>`
+        // `<img src="${this.imagen}"/> <p>${this.nombre} ${this.edad} ${this.comentarios} ${this.sonido}</p>`
     }
 
     rugir() {
@@ -62,8 +60,13 @@ class Leon extends Animal {
 }
 
 class Lobo extends Animal {
-    pintarHTML() {
+    pintarHTML(elemento) {
         console.log(`estoy pintando a ${this.nombre}`)
+        elemento.innerHTML =
+            `<div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+              </div>`
     }
 
     aullar() {
@@ -72,8 +75,13 @@ class Lobo extends Animal {
 }
 
 class Oso extends Animal {
-    pintarHTML() {
+    pintarHTML(elemento) {
         console.log(`estoy pintando a ${this.nombre}`)
+        elemento.innerHTML =
+            `<div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+              </div>`
     }
 
     gruñir() {
@@ -82,8 +90,13 @@ class Oso extends Animal {
 }
 
 class Serpiente extends Animal {
-    pintarHTML() {
+    pintarHTML(elemento) {
         console.log(`estoy pintando a ${this.nombre}`)
+        elemento.innerHTML =
+            `<div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+              </div>`
     }
 
     sisear() {
@@ -92,8 +105,13 @@ class Serpiente extends Animal {
 }
 
 class Aguila extends Animal {
-    pintarHTML() {
+    pintarHTML(elemento) {
         console.log(`estoy pintando a ${this.nombre}`)
+        elemento.innerHTML =
+            `<div class="card" style="width: 18rem;">
+                <img src="${this.imagen}" class="card-img-top" alt="...">
+                <button class="btn btn-secondary"> <i class="fa-solid fa-volume-high"></i> </button>
+              </div>`
     }
 
     chillar() {
@@ -137,7 +155,6 @@ const audioPlayer = document.querySelector("#audioPlayer")
 const modalAnimal = document.querySelector("#modalAnimal")
 
 
-
 animalFormulario.addEventListener("submit", (evento) => {
     evento.preventDefault()
 
@@ -148,20 +165,34 @@ animalFormulario.addEventListener("submit", (evento) => {
     // console.log(animales)
 
     const animalEncontrado = animales.find((item) => item.name.toLowerCase() === animalSeleccion.value.toLowerCase())
+    const imagen = `assets/imgs/${animalEncontrado.imagen}`;
+
 
     switch (animalSeleccion.value) {
         case "Leon":
-            const leon = new Leon(animalEncontrado.name, edadSeleccion.value, animalEncontrado.imagen, comentarios.value, animalEncontrado.sonido)
+            const leon = new Leon(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
             leon.pintarHTML(Animales)
             leon.rugir()
             break;
         case "Lobo":
+            const lobo = new Lobo(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
+            lobo.pintarHTML(Animales)
+            lobo.aullar()
             break;
         case "Oso":
+            const oso = new Oso(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
+            oso.pintarHTML(Animales)
+            oso.gruñir()
             break;
         case "Serpiente":
+            const serpiente = new Serpiente(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
+            serpiente.pintarHTML(Animales)
+            serpiente.sisear()
             break;
         case "Aguila":
+            const aguila = new Aguila(animalEncontrado.name, edadSeleccion.value, imagen, comentarios.value, animalEncontrado.sonido)
+            aguila.pintarHTML(Animales)
+            aguila.chillar()
             break;
     }
 })
