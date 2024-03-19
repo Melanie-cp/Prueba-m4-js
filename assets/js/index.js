@@ -116,7 +116,6 @@ const comentarios = document.querySelector("#comentarios");
 const preview = document.querySelector("#preview");
 const btnRegistrar = document.querySelector("#btnRegistrar");
 const audioPlayer = document.querySelector("#audioPlayer");
-const modalAnimal = document.querySelector("#modalAnimal");
 
 function agregarAnimal(animal) {
 
@@ -133,6 +132,11 @@ function agregarAnimal(animal) {
     animalDiv.innerHTML = contenidoAnimal;
     Animales.appendChild(animalDiv);
     animal.previewAnimal(preview);
+
+    const imagenAnimal = animalDiv.querySelector('img');
+    imagenAnimal.addEventListener('click', () => {
+        mostrarDetalleAnimal(animal);
+    });
 }
 
 animalFormulario.addEventListener("submit", (evento) => {
@@ -170,3 +174,21 @@ animalFormulario.addEventListener("submit", (evento) => {
     agregarAnimal(animal);
     animalFormulario.reset();
 });
+
+function mostrarDetalleAnimal(animal) {
+    const modalAnimal = document.querySelector('#modalAnimal');
+    const modalBody = modalAnimal.querySelector('.modal-body');
+
+    const contenidoDetalle = `
+        <div class="text-center">
+            <img src="${animal.imagen}" class="img-fluid" alt="${animal.nombre}">
+            <h5 class="texto-blanco">${animal.nombre}</h5>
+            <p class="texto-blanco">Edad: ${animal.edad}</p>
+            <p class="texto-blanco">Comentarios: ${animal.comentarios}</p>
+        </div>
+    `;
+
+    modalBody.innerHTML = contenidoDetalle;
+    const modal = new bootstrap.Modal(modalAnimal);
+    modal.show();
+}
