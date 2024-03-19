@@ -26,8 +26,10 @@
           Ingrese los datos del animal
         </h6>
         <hr />
+
         <div class="card-text my-3">
-          <div class="form-group">
+
+          <form id="animalFormulario">
             <label for="exampleInputPassword1">Nombre del animal:</label>
             <select class="form-control bg-dark text-white" id="animalSeleccion">
               <option disabled selected>Seleccione un animal</option>
@@ -37,13 +39,10 @@
               <option value="Serpiente">Serpiente</option>
               <option value="Aguila">Águila</option>
             </select>
-          </div>
 
-          <div class="form-group">
             <label for="exampleInputPassword1">Años de edad estimados:</label>
             <select class="form-control bg-dark text-white" id="edadSeleccion">
               <option disabled selected>Seleccione un rango de años</option>
-
               <option value="0 - 1 años">0 - 1 años</option>
               <option value="1 - 3 años">1 - 3 años</option>
               <option value="3 - 5 años">3 - 5 años</option>
@@ -51,19 +50,17 @@
               <option value="8 - 10 años">8 - 10 años</option>
               <option value="Más de 10 años">Más de 10 años</option>
             </select>
-          </div>
 
-          <div class="form-group">
             <label for="exampleInputPassword1">Comentarios:</label>
             <textarea rows="5" class="form-control shadow-lg bg-dark text-white" id="comentarios"></textarea>
-          </div>
 
-          <div class="p-5 card bg-dark">
-            <div id="preview"></div>
-          </div>
+            <div class="p-5 card bg-dark">
+              <div id="preview"></div>
+            </div>
         </div>
 
-        <btn class="btn btn-light d-block" id="btnRegistrar">Agregar</btn>
+        <button type="submit" class="btn btn-light d-block" id="btnRegistrar">Agregar</button>
+        </form>
       </div>
     </div>
   </div>
